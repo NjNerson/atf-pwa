@@ -1,0 +1,50 @@
+name: 🧪 CI - Build, PR to Main, and Auto-Merge
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-auto-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🛠 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: ⚙️ Generate Prisma Client
+        run: npx prisma generate
+
+      - name: 🧱 Build Next.js project
+        run: npm run build
+
+      # 🚨 Placeholder for future tests
+      - name: ✅ Run Tests (future-ready)
+        run: echo "No tests yet — add them here later"
+
+      - name: 🔀 Create Pull Request to main
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          commit-message: "✅ Auto PR: Build from dev"
+          title: "🔁 Auto PR from dev to main"
+          body: |
+            ✅ This PR was auto-generated after successful CI on `dev`.
+            Merging will trigger Vercel to deploy to **production**.
+
+      - name: 🚀 Enable Auto-Merge
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          merge-method: squash
