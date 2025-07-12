@@ -12,3 +12,18 @@ export const handleError = (error: unknown) => {
     return { errorMessage: "Une erreur est survenue..." };
   }
 };
+
+export const getBaseUrl = () => {
+  if (typeof window !== "undefined") {
+    // In the browser, use relative URL
+    return "";
+  }
+
+  // On server:
+  return process.env.VERCEL_URL || process.env.NEXT_PUBLIC_BASE_URL;
+  // process.env.NEXT_PUBLIC_BASE_URL ||
+  // (process.env.VERCEL_URL
+  //   ? `https://${process.env.VERCEL_URL}`
+  //   : "http://localhost:3000")
+  // );
+};
