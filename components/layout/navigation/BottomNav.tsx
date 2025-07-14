@@ -1,6 +1,5 @@
 "use client";
 
-import { HomeIcon, UserIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { navLinks } from "./navlinks";
 import { usePathname } from "next/navigation";
@@ -17,7 +16,7 @@ export default function BottomNav() {
           <Link
             key={link.href}
             href={link.href}
-            className={`flex flex-col items-center text-gray-700 hover:text-primary-blue ${
+            className={`flex flex-col items-center text-gray-700 hover:text-primary-blue duration-100 ${
               isActive ? "bg-blue-400 text-white rounded-lg p-2" : ""
             }`}
           >
