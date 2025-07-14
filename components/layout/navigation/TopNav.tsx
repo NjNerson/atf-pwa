@@ -25,7 +25,7 @@ export default function TopNav() {
 
   return (
     <header
-      className={`md:sticky fixed w-full top-0 z-20 bg-white flex items-center gap-4 px-4 py-1 transition-transform duration-300
+      className={`md:sticky shadow-md fixed w-full top-0 z-20 bg-white flex items-center gap-4 px-4 py-1 transition-transform duration-300
       `}
     >
       <button
