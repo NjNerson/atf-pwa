@@ -1,18 +1,11 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import {
-  EnvelopeIcon,
-  LockClosedIcon,
-  EyeSlashIcon,
-  EyeIcon,
-} from "@heroicons/react/24/outline";
-import { KeyIcon } from "@heroicons/react/24/solid";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { useTransition, useState, use } from "react";
+import { useTransition, useState } from "react";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Mail, Lock, EyeOff, Eye, KeyRound, Loader2 } from "lucide-react";
 import { loginUserAction } from "@/action/user/user";
 import { useRouter } from "next/navigation";
 
@@ -46,7 +39,7 @@ function Auth() {
       <Card className="relative z-10 w-full max-w-sm bg-white/80 backdrop-blur-md shadow-xl border border-gray-200 rounded-xl">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-semibold text-black flex items-center justify-center-safe">
-            <KeyIcon className=" size-6 text-amber-400" />
+            <KeyRound className=" size-6 text-amber-400" />
             &nbsp;ATF - Connexion
           </CardTitle>
         </CardHeader>
@@ -61,7 +54,7 @@ function Auth() {
                 Email
               </Label>
               <div className="relative">
-                <EnvelopeIcon className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Mail className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <Input
                   id="email"
                   type="email"
@@ -85,7 +78,7 @@ function Auth() {
                 Mot de passe
               </Label>
               <div className="relative">
-                <LockClosedIcon className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Lock className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <Input
                   id="password"
                   type={showPassword ? "text" : "password"}
@@ -108,9 +101,9 @@ function Auth() {
                   }
                 >
                   {showPassword ? (
-                    <EyeSlashIcon className="w-5 h-5" />
+                    <Eye className="w-5 h-5" />
                   ) : (
-                    <EyeIcon className="w-5 h-5" />
+                    <EyeOff className="w-5 h-5" />
                   )}
                 </button>
               </div>

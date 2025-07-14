@@ -1,0 +1,33 @@
+name: 🧪 CI - Build, PR to Main, and Auto-Merge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-auto-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🛠 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      #   - name: ⚙️ Generate Prisma Client
+      #     run: npx prisma generate
+
+      - name: 🧱 Build Next.js project
+        run: npm run build
+
+      # 🚨 Placeholder for future tests
+      - name: ✅ Run Tests (future-ready)
+        run: echo "No tests yet — add them here later"
