@@ -80,6 +80,13 @@
   --toast-success-color: #065f46; /* dark green text */
   --toast-error-background: #fee2e2; /* light red */
   --toast-error-color: #991b1b;
+
+  --auth-background: #f9fafb;
+  --auth-card-bg: rgba(255, 255, 255, 0.8);
+  --auth-blur: blur(8px);
+  --primary-blue: #2563eb;
+  --primary-blue-hover: #1d4ed8;
+  --text-on-bg: #000000;
 }
 
 .dark {
