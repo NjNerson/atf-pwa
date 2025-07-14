@@ -10,7 +10,7 @@ export default function MainLayout({
   return (
     <div className="min-h-screen w-full flex bg-auth-background overflow-hidden ">
       {/* Sidebar fixée */}
-      <aside className="hidden md:flex md:w-50 h-screen fixed left-0 top-0  shadow-2xl border-r border-r-blue-200">
+      <aside className="hidden md:flex md:w-50 fixed left-0 top-0  border-r border-r-blue-200">
         <SideNav />
       </aside>
 
