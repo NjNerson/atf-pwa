@@ -15,8 +15,8 @@ export default function MainLayout({
       </aside>
 
       {/* Main content avec padding-left pour compenser le aside */}
-      <main className="flex-1 overflow-y-auto md:ml-50 pb-16 md:pb-0 flex flex-col">
-        <div className="pb-8">
+      <main className="flex-1 overflow-y-auto md:ml-50 py-8 sm:py-0 md:pb-0 flex flex-col">
+        <div className="pb-4 md:pb-0">
           <TopNav />
         </div>
         {children}
