@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 export default function BottomNav() {
   const pathname = usePathname();
   return (
-    <nav className="flex justify-around not-even:pb-2 items-center bg-white border-t border-gray-200 shadow-md h-16">
+    <nav className="flex justify-around py-2 items-center bg-white border-t border-gray-200 shadow-md h-16">
       {navLinks.map((link) => {
         const isActive =
           link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
@@ -22,6 +22,7 @@ export default function BottomNav() {
             }`}
           >
             <link.icon className="w-6 h-6" />
+            <span className="text-xs hidden sm:block">{link.title}</span>
           </Link>
         );
       })}
