@@ -1,16 +1,9 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-// import {
-//   EnvelopeIcon,
-//   LockClosedIcon,
-//   EyeSlashIcon,
-//   EyeIcon,
-// } from "@heroicons/react/24/outline";
-// import { KeyIcon } from "@heroicons/react/24/solid";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { useTransition, useState, use } from "react";
+import { useTransition, useState } from "react";
 import { toast } from "sonner";
 import { Mail, Lock, EyeOff, Eye, KeyRound, Loader2 } from "lucide-react";
 import { loginUserAction } from "@/action/user/user";
