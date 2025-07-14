@@ -10,7 +10,9 @@ export default function BottomNav() {
   return (
     <nav className="flex justify-around not-even:pb-2 items-center bg-white border-t border-gray-200 shadow-md h-16">
       {navLinks.map((link) => {
-        const isActive = pathname === link.href;
+        const isActive =
+          link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+
         return (
           <Link
             key={link.href}

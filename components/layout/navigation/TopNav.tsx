@@ -12,51 +12,10 @@ export default function TopNav() {
   const title = topNavName[pathname] || "ATF Management";
 
   const [canGoBack, setCanGoBack] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const lastScrollY = useRef(0);
-  const timeoutId = useRef<NodeJS.Timeout | null>(null);
 
+  // Check if we can go back in history ,....prevent empty history
   useEffect(() => {
     setCanGoBack(window.history.length > 1);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY < 0) return;
-
-      if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-      }
-
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = () => {
-      setVisible(true);
-
-      if (timeoutId.current) clearTimeout(timeoutId.current);
-
-      timeoutId.current = setTimeout(() => {
-        if (window.scrollY > 50) setVisible(false);
-      }, 3000);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      if (timeoutId.current) clearTimeout(timeoutId.current);
-    };
   }, []);
 
   const handleGoBack = () => {
@@ -66,13 +25,8 @@ export default function TopNav() {
 
   return (
     <header
-      className={`sticky top-0 z-20 bg-white flex items-center gap-4 px-4 py-1 transition-transform duration-300 ${
-        visible ? "translate-y-0" : "-translate-y-full"
-      }`}
-      style={{
-        // Optional: add shadow when visible for better UX
-        boxShadow: visible ? "0 2px 4px rgba(0,0,0,0.01)" : "none",
-      }}
+      className={`md:sticky fixed w-full top-0 z-20 bg-white flex items-center gap-4 px-4 py-1 transition-transform duration-300
+      `}
     >
       <button
         onClick={handleGoBack}

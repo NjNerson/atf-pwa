@@ -9,11 +9,15 @@ export default function SideNav() {
   const pathname = usePathname();
 
   return (
-    <div className="bg-white h-screen w-60 shadow-lg flex flex-col">
+    <div className="bg-white h-screen w-60  flex flex-col">
       <Header />
       <nav className="flex flex-col flex-1 p-4 space-y-1 overflow-y-auto">
         {navLinks.map((link) => {
-          const isActive = pathname === link.href;
+          const isActive =
+            link.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(link.href);
+
           return (
             <Link
               key={link.href}
