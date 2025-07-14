@@ -3,7 +3,7 @@ import { Home, UserCircle, Settings, Users, Trophy } from "lucide-react";
 
 export const navLinks = [
   {
-    title: "Accueil",
+    title: "Dashboard",
     href: "/",
     icon: Home,
   },
@@ -30,7 +30,7 @@ export const navLinks = [
 ];
 
 export const topNavName: Record<string, string> = {
-  "/": "Accueil",
+  "/": "Dashboard",
   "/profile": "Profil",
   "/members": "Membres",
   "/settings": "Paramètres",
