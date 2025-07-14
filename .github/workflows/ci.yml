@@ -1,4 +1,4 @@
-name: 🧪 CI - Build, PR to Main, and Auto-Merge
+name: 🧪 CI - Build & Preview on Dev
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - dev
 
 jobs:
-  build-and-auto-merge:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,23 +28,5 @@ jobs:
       - name: 🧱 Build Next.js project
         run: npm run build
 
-      # 🚨 Placeholder for future tests
-      - name: ✅ Run Tests (future-ready)
-        run: echo "No tests yet — add them here later"
-
-      - name: 🔀 Create Pull Request to main
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
-          commit-message: "✅ Auto PR: Build from dev"
-          title: "🔁 Auto PR from dev to main"
-          body: |
-            ✅ This PR was auto-generated after successful CI on `dev`.
-            Merging will trigger Vercel to deploy to **production**.
-
-      - name: 🚀 Enable Auto-Merge
-        uses: peter-evans/enable-pull-request-automerge@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          merge-method: squash
+      - name: ✅ Placeholder for Tests (future)
+        run: echo "✅ Tests to be added later"
