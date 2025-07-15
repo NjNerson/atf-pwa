@@ -8,9 +8,7 @@ const PageLayout = ({
   className?: string;
 }) => {
   return (
-    <div
-      className={`flex min-h-screen py-6 w-full items-center justify-center bg-blue-50 ${className}`}
-    >
+    <div className={`min-h-screen p-2 w-full  bg-blue-50 ${className}`}>
       {children}
     </div>
   );
