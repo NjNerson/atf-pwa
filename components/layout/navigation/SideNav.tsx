@@ -23,7 +23,7 @@ export default function SideNav() {
             <Link
               key={link.href}
               href={link.href}
-              className={`flex  duration-100 items-center gap-3 px-3 py-2 rounded-md text-sm font-normal transition-colors ${
+              className={`flex  duration-100 items-center gap-3 px-3 py-2 rounded-md text-base font-normal transition-colors ${
                 isActive
                   ? "bg-blue-600 text-white shadow"
                   : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"
