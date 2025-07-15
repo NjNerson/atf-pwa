@@ -1,7 +1,7 @@
 const DashboardBanner = () => {
   return (
     <div className="shadow-lg w-full p-4 bg-white rounded-md">
-      <h1 className=" text-3xl md:text-3xl font-medium text-blue-900 py-2">
+      <h1 className=" text-3xl md:text-3xl font-medium tracking-wide tracking-wide text-blue-900 py-2">
         Bienvenue sur Dashboard{" "}
         <span className="  text-red-400">ATF - Management</span> 👋
       </h1>
