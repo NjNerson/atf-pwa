@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { getBaseUrl } from "@/lib/utils";
 
 type ChampItemType = {
   name?: string;
@@ -9,7 +10,7 @@ type ChampItemType = {
 };
 
 const ComingChampListItem = ({ name, date, place, id }: ChampItemType) => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const baseUrl = getBaseUrl();
   return (
     <>
       <ul className=" list-none grid grid-cols-2 md:grid-cols-4 md: gap-x-4 text-gray-900 items-center  p-4 hover:bg-gray-100 ">
