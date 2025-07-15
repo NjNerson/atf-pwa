@@ -1,7 +1,7 @@
 import PageLayout from "@/components/layout/PageLayout";
 import React from "react";
 
-const Competition = () => {
+const Competitions = () => {
   return (
     <PageLayout>
       <h1 className="text-2xl font-bold text-center">Competitions Page</h1>
@@ -9,4 +9,4 @@ const Competition = () => {
   );
 };
 
-export default Competition;
+export default Competitions;
