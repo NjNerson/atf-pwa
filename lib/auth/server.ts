@@ -33,12 +33,12 @@ export async function createClient() {
 export async function getUser() {
   const { auth } = await createClient();
 
-  const userObject = await auth.getUser();
+  const { error, data } = await auth.getUser();
 
-  if (userObject.error) {
-    console.error("Error fetching user:", userObject.error);
+  if (error) {
+    // console.error("Error fetching user:", userObject.error);
     return null;
   }
 
-  return userObject.data.user;
+  return data.user;
 }
