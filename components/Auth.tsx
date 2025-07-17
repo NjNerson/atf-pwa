@@ -36,7 +36,7 @@ function Auth() {
       style={{ backgroundImage: "url('/bg-login.jpeg')" }}
     >
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm z-0" />
-      <Card className="relative z-10 w-full max-w-sm bg-white/80 backdrop-blur-md shadow-xl border border-gray-200 rounded-xl">
+      <Card className="relative z-10 w-full max-w-xs bg-white/80 backdrop-blur-md shadow-xl border border-gray-200 rounded-xl">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-semibold text-black flex items-center justify-center-safe">
             <KeyRound className=" size-6 text-amber-400" />
