@@ -18,7 +18,7 @@ const ConfirmDialog = ({
   return (
     show && (
       <div
-        className="absolute top-0 left-0 z-100 w-screen h-screen md:bg-blue-100/20  
+        className="absolute top-0 left-0 z-100 w-screen h-screen md:bg-blue-100/30  
             flex justify-center items-center bg-blue-100/60"
         onClick={onCancel}
       >
