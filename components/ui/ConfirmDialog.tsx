@@ -1,9 +1,11 @@
+import { Loader2 } from "lucide-react";
 import { Button } from "./button";
 
 type DialogType = {
   show?: boolean;
   title?: string;
   message?: string;
+  isPending?: boolean;
   onCancel?: () => void;
   onConfirm?: () => void;
 };
@@ -12,6 +14,7 @@ const ConfirmDialog = ({
   show = false,
   title,
   message,
+  isPending = false,
   onCancel,
   onConfirm,
 }: DialogType) => {
@@ -50,7 +53,8 @@ const ConfirmDialog = ({
               onClick={onConfirm}
               className="w-1/2 bg-blue-500 hover:bg-blue-400 "
             >
-              Oui
+              {isPending ? <Loader2 className="size-5 animate-spin" /> : "Oui"}
+              {/* Oui */}
             </Button>
           </div>
         </div>
