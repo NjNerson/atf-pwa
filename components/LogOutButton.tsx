@@ -35,7 +35,9 @@ const LogOutButton = ({ className = "" }: { className?: string }) => {
       />
       <button
         onClick={logout}
-        className={`flex gap-2 px-3 items-center justify-center mt-auto text-sm  py-1.5 text-red-500  rounded-md cursor-pointer hover:bg-red-100 transition-colors ${className}`}
+        className={`flex gap-2 px-3 items-center justify-center mt-auto text-sm  py-1.5 text-red-500  rounded-md cursor-pointer hover:bg-red-100 transition-colors ${
+          isPending ? "pointer-events-none" : ""
+        } ${className}`}
       >
         {isPending ? (
           <Loader2 className="size-5 animate-spin" />
