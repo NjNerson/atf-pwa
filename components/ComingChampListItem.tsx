@@ -28,7 +28,7 @@ const ComingChampListItem = ({ name, date, place, id }: ChampItemType) => {
         </li>
         <li className="  col-span-1 flex justify-end">
           <Link
-            href={`${baseUrl}/competitions/${id}`}
+            href={`/competitions/${id}`}
             className="w-8 h-8   block hover:text-blue-500"
           >
             <ArrowRight className=" w-full h-full" />
