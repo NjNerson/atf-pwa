@@ -15,8 +15,8 @@ const LogOutMobile = () => {
   const [showLogOutDialog, setShowLogOutDialog] = useState(false);
 
   const handleLogout = async () => {
-    const { errorMessage } = await logOutUserAction();
     setConfirmLogOut(true);
+    const { errorMessage } = await logOutUserAction();
     if (errorMessage) {
       toast.error(errorMessage);
       setConfirmLogOut(false);
