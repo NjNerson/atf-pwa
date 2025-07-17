@@ -10,19 +10,21 @@ import ConfirmDialog from "./ui/ConfirmDialog";
 
 const LogOutMobile = () => {
   const [isPending, startTransition] = useTransition();
+  const [confirmLogOut, setConfirmLogOut] = useState(false);
   const router = useRouter();
   const [showLogOutDialog, setShowLogOutDialog] = useState(false);
 
   const handleLogout = async () => {
-    startTransition(async () => {
-      const { errorMessage } = await logOutUserAction();
-      if (errorMessage) {
-        toast.error(errorMessage);
-      } else {
-        toast.success("Vous êtes déconnecté !");
-        router.push("/login");
-      }
-    });
+    const { errorMessage } = await logOutUserAction();
+    setConfirmLogOut(true);
+    if (errorMessage) {
+      toast.error(errorMessage);
+      setConfirmLogOut(false);
+    } else {
+      toast.success("Vous êtes déconnecté !");
+      router.push("/login");
+      setConfirmLogOut(false);
+    }
   };
 
   const logout = () => {
@@ -34,19 +36,14 @@ const LogOutMobile = () => {
       <ConfirmDialog
         show={showLogOutDialog}
         onConfirm={handleLogout}
+        isPending={confirmLogOut}
         onCancel={() => setShowLogOutDialog(false)}
       />
       <div className="w-full p-1 bg-white rounded-md shadow-lg md:hidden">
         <MenuItem
           link="/settings/category"
           title="Déconnexion"
-          icon={
-            isPending ? (
-              <Loader2 className="size-5 animate-spin text-red-600" />
-            ) : (
-              <LogOut className="text-red-600" />
-            )
-          }
+          icon={<LogOut className="text-red-600" />}
           className="text-red-600 "
           isButton={true}
           onClick={logout}

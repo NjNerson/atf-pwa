@@ -7,19 +7,21 @@ import ConfirmDialog from "./ui/ConfirmDialog";
 
 const LogOutButton = ({ className = "" }: { className?: string }) => {
   const [isPending, startTransition] = useTransition();
+  const [confirmLogOut, setConfirmLogOut] = useState(false);
   const router = useRouter();
   const [showLogOutDialog, setShowLogOutDialog] = useState(false);
 
   const handleLogout = async () => {
-    startTransition(async () => {
-      const { errorMessage } = await logOutUserAction();
-      if (errorMessage) {
-        toast.error(errorMessage);
-      } else {
-        toast.success("Vous êtes déconnecté !");
-        router.push("/login");
-      }
-    });
+    setConfirmLogOut(true);
+    const { errorMessage } = await logOutUserAction();
+    if (errorMessage) {
+      toast.error(errorMessage);
+      setConfirmLogOut(false);
+    } else {
+      toast.success("Vous êtes déconnecté !");
+      router.push("/login");
+      setConfirmLogOut(false);
+    }
   };
 
   const logout = () => {
@@ -30,6 +32,7 @@ const LogOutButton = ({ className = "" }: { className?: string }) => {
     <>
       <ConfirmDialog
         show={showLogOutDialog}
+        isPending={confirmLogOut}
         onConfirm={handleLogout}
         onCancel={() => setShowLogOutDialog(false)}
       />
@@ -39,11 +42,7 @@ const LogOutButton = ({ className = "" }: { className?: string }) => {
           isPending ? "pointer-events-none" : ""
         } ${className}`}
       >
-        {isPending ? (
-          <Loader2 className="size-5 animate-spin" />
-        ) : (
-          <LogOut className="size-5" />
-        )}
+        <LogOut className="size-5" />
 
         <span>Déconnexion</span>
       </button>
