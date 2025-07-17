@@ -1,0 +1,177 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+//================== User Role Type ===================
+enum Role {
+  ADMIN
+  SUPER_ADMIN
+}
+// ================= User Management =================
+
+model User {
+  id         String   @id  @default(uuid()) @db.Uuid
+  userId     String   @unique @map("user_id")         // Link to Supabase auth.users.id , i need to always add id from auth.user here!!!
+  email      String @unique
+  name        String
+  firstName     String @map("first_name")
+  role       Role
+  imageUrl   String? @map("image_url")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  histories  History[]
+
+  @@map("users")
+}
+
+model History {
+  id      String   @id @default(uuid()) @db.Uuid
+  userId  String  @db.Uuid @map("user_id")
+  action  String
+  date    DateTime @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("histories")
+}
+
+// ================= Member Management =================
+model Member {
+  id         String   @id @default(uuid()) @db.Uuid
+  name       String
+  firstName  String    @map("first_name")
+  birthDate  DateTime  @map("birth_date")
+  contact    String?
+  height     Float?
+  weight     Float?
+  numId      String?    @map("num_id")
+  address    String?
+  school     String?
+  fbName     String?    @map("fb_name")
+  imageUrl   String?   @map("image_url")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt       @map("updated_at")
+
+  categoryId    String?  @db.Uuid  @map("category_id")
+  category      Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  weightClassId String? @db.Uuid  @map("weight_class_id")
+  weightClass   WeightClass? @relation(fields: [weightClassId], references: [id], onDelete: SetNull)
+
+
+  parentId   String? @db.Uuid   @map("parent_id")
+  parent     Parent?   @relation(fields: [parentId], references: [id], onDelete: SetNull)
+  
+  participations MemberChampionship[]
+
+  @@map("members")
+}
+
+model Parent {
+  id         String   @id @default(uuid()) @db.Uuid
+  name       String
+  firstName  String @map("first_name")
+  contact    String
+  fbName     String?    @map("fb_name")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt       @map("updated_at")
+
+  members    Member[]
+
+  @@map("parents")
+}
+
+// ========== Championship Types ==========
+enum ChampionshipType {
+  REGIONAL
+  NATIONAL
+  INTERNATIONAL
+  EXTRA
+}
+
+// ========== Championship Model ==========
+model Championship {
+  id         String    @id @default(uuid()) @db.Uuid
+  name       String
+  place      String
+  date       DateTime
+  type       ChampionshipType
+  imageUrl   String?   @map("image_url")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt       @map("updated_at")
+
+  categoryId String?  @db.Uuid  @map("category_id")          // Foreign key, optional because not all championships have a category
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+
+  participations  MemberChampionship[]
+
+  @@map("championships")
+}
+
+// ========== Pivot Table: Member + Championship + Result ==========
+model MemberChampionship {
+  id              String        @id @default(uuid()) @db.Uuid
+  memberId        String     @db.Uuid    @map("member_id")
+  championshipId  String      @db.Uuid   @map("championship_id")
+  rank            Int
+
+  member          Member        @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  championship    Championship  @relation(fields: [championshipId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt       @map("updated_at")
+
+  @@unique([memberId, championshipId])  // Ensure a member can have only one result per championship
+  @@map("member_championships")
+}
+
+
+
+// ================= Categories =================
+model Category {
+  id         String       @id @default(uuid()) @db.Uuid
+  name       String
+  minAge     Int          @map("min_age")
+  maxAge     Int          @map("max_age")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt       @map("updated_at")
+  championships Championship[]
+  members Member[]
+
+  weightClasses WeightClass[]
+
+  @@map("categories")
+}
+
+// ================= Weight Classes =================
+model WeightClass {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  minWeight   Float     @map("min_weight")
+  maxWeight   Float     @map("max_weight")
+  members Member[]
+
+  categoryId  String   @db.Uuid  @map("category_id")
+
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt       @map("updated_at")
+
+
+  @@map("weight_classes")
+}
+
+
+
+
+
+
