@@ -109,7 +109,11 @@ function Auth() {
               </div>
             </div>
 
-            <Button className="w-full bg-blue-600 hover:bg-blue-700 transition-colors duration-200 text-white font-semibold py-3 rounded-md">
+            <Button
+              className={`w-full bg-blue-600 hover:bg-blue-700 transition-colors duration-200 text-white font-semibold py-3 rounded-md ${
+                isPending ? "pointer-events-none" : ""
+              }`}
+            >
               {isPending ? (
                 <Loader2 className=" animate-spin" />
               ) : (
